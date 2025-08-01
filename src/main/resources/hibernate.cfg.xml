@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/inheritance?useSSL=false&amp;serverTimezone=UTC</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">41456514</property>
+        <property name="hibernate.show_sql">true</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL57Dialect</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <mapping class="core.basesyntax.model.figure.Circle"/>
+        <mapping class="core.basesyntax.model.figure.Figure"/>
+        <mapping class="core.basesyntax.model.figure.Triangle"/>
+        <mapping class="core.basesyntax.model.ma.Coach"/>
+        <mapping class="core.basesyntax.model.ma.Mentor"/>
+        <mapping class="core.basesyntax.model.ma.Person"/>
+        <mapping class="core.basesyntax.model.machine.Car"/>
+        <mapping class="core.basesyntax.model.machine.Truck"/>
+        <mapping class="core.basesyntax.model.machine.Machine"/>
+        <mapping class="core.basesyntax.model.zoo.Animal"/>
+        <mapping class="core.basesyntax.model.zoo.Cat"/>
+        <mapping class="core.basesyntax.model.zoo.Dog"/>
+
+    </session-factory>
+</hibernate-configuration>
