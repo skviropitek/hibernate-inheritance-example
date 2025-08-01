@@ -14,8 +14,9 @@ public class AnimalDaoImpl extends AbstractDao implements AnimalDao {
 
     @Override
     public Animal save(Animal animal) {
+        Session session = sessionFactory.openSession();
         Transaction transaction = null;
-        try (Session session = sessionFactory.openSession()) {
+        try {
             transaction = session.beginTransaction();
             session.persist(animal);
             transaction.commit();
@@ -25,6 +26,8 @@ public class AnimalDaoImpl extends AbstractDao implements AnimalDao {
                 transaction.rollback();
             }
             throw new RuntimeException("Cannot add animal: " + animal, e);
+        } finally {
+            session.close();
         }
     }
 
@@ -32,8 +35,9 @@ public class AnimalDaoImpl extends AbstractDao implements AnimalDao {
     public List<Animal> findByNameFirstLetter(Character character) {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery(
-                    "FROM Animal a WHERE lower(a.name) LIKE :prefix", Animal.class)
-                    .setParameter("prefix", Character.toLowerCase(character) + "%").getResultList();
+                            "FROM Animal a WHERE lower(a.name) LIKE :prefix", Animal.class)
+                    .setParameter("prefix", Character.toLowerCase(character) + "%")
+                    .getResultList();
         } catch (Exception e) {
             throw new RuntimeException("Cannot find animals with name starting with: "
                     + character, e);
